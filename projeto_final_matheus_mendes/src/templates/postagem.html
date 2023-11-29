@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projeto de Microserviços</title>
+
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body class="container p-5 bg-secondary-subtle">
+
+<div class="col-8 mx-auto">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3">
+            <li class="breadcrumb-item">
+                <a class="link-body-emphasis" href="/">
+                    <i class="bi bi-house"></i>
+                    <span class="visually-hidden">Home</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a class="link-body-emphasis fw-semibold text-decoration-none" href="/">Sobre</a>
+            </li>
+
+            <li class="breadcrumb-item">
+                <a class="link-body-emphasis fw-semibold text-decoration-none" href="/feed">Feed</a>
+            </li>
+            <li class="breadcrumb-item active">
+                Postagem
+            </li>
+        </ol>
+    </nav>
+
+    {% if postagem %}
+
+    <div class="shadow-sm rounded-3 p-3 bg-light mt-4">
+
+        {% if postagem['usuario'] %}
+        <a class="text-secondary-emphasis" href="/perfil/{{ postagem['uid'] }}">
+            {{ postagem['usuario']['username'] }}
+        </a>
+        {% else %}
+        <a class="text-secondary-emphasis placeholder-glow" href="">
+            <span class="placeholder col-2 rounded-3"></span>
+        </a>
+        {% endif %}
+
+        <p class="text-secondary-emphasis mt-2">{{ postagem['conteudo'] }}</p>
+    </div>
+
+    {% else %}
+
+    <div class="shadow-sm rounded-3 p-3 bg-light mt-4">
+        <a class="text-secondary-emphasis placeholder-glow" href=""> <span
+                class="placeholder col-2 rounded-3"></span></a>
+
+        <p class="card-text placeholder-glow mt-4">
+            <span class="placeholder col-7 rounded-3"></span>
+            <span class="placeholder col-4 rounded-3"></span>
+            <span class="placeholder col-4 rounded-3"></span>
+            <span class="placeholder col-6 rounded-3"></span>
+            <span class="placeholder col-8 rounded-3"></span>
+        </p>
+    </div>
+
+    {% endif %}
+
+    <hr class="mt-4">
+
+    {% if comentarios %}
+
+    {% for key in comentarios %}
+    <div class="shadow-sm rounded-3 p-3 bg-light mt-4">
+
+        {% if comentarios[key]['usuario'] %}
+        <a class="text-secondary-emphasis" href="/perfil/{{ comentarios[key]['uid'] }}">
+            {{ comentarios[key]['usuario']['username'] }}
+        </a>
+        {% else%}
+         <a class="text-secondary-emphasis placeholder-glow" href="">
+             <span class="placeholder col-2 rounded-3"></span>
+         </a>
+        {% endif %}
+
+        <p class="text-secondary-emphasis mb-0 mt-1">{{ comentarios[key]['conteudo'] }}</p>
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <div class="shadow-sm rounded-3 p-3 bg-light mt-4">
+        <a class="text-secondary-emphasis placeholder-glow" href=""> <span
+                class="placeholder col-2 rounded-3"></span></a>
+
+        <p class="card-text placeholder-glow mt-4">
+            <span class="placeholder col-7 rounded-3"></span>
+            <span class="placeholder col-4 rounded-3"></span>
+            <span class="placeholder col-8 rounded-3"></span>
+        </p>
+    </div>
+    {% endif %}
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+</html>

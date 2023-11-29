@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projeto de Microserviços</title>
+
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body class="container p-5 bg-secondary-subtle">
+
+<div class="col-8 mx-auto">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-chevron p-3 bg-body-tertiary rounded-3">
+            <li class="breadcrumb-item">
+                <a class="link-body-emphasis" href="/">
+                    <i class="bi bi-house"></i>
+                    <span class="visually-hidden">Home</span>
+                </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Sobre
+            </li>
+            <li class="breadcrumb-item">
+                <a class="link-body-emphasis fw-semibold text-decoration-none" href="/feed">Feed</a>
+            </li>
+        </ol>
+    </nav>
+
+
+    <div class="bg-body-tertiary shadow-sm p-4 rounded-3 mb-5">
+        <h1 class="text-secondary-emphasis">Projeto de Microserviços</h1>
+        <p class="text-secondary-emphasis">
+            A proposta é de desenvolver a demonstração de uma aplicação implementada utilizando o estilo arquitetônico
+            baseado em objetos e estilo arquitetônico de microserviços.
+        </p>
+
+        <h2 class="text-secondary-emphasis mt-3">Serviços</h2>
+
+        <p class="my-2">Serviço de aplicacao</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 d-flex justify-content-between">
+            <span>http://127.0.0.1:<code>5000</code></span>
+            {% if application %}
+            <span class="badge bg-success rounded-pill my-auto">ON</span>
+            {% else %}
+            <span class="badge bg-danger rounded-pill my-auto">OFF</span>
+            {% endif %}
+        </div>
+
+        <p class="my-2">Serviço de usuarios</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 d-flex justify-content-between">
+            <span>http://127.0.0.1:<code>5001</code></span>
+            {% if usuarios %}
+            <span class="badge bg-success rounded-pill my-auto">ON</span>
+            {% else %}
+            <span class="badge bg-danger rounded-pill my-auto">OFF</span>
+            {% endif %}
+        </div>
+
+        <p class="my-2">Serviço de postagens</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 d-flex justify-content-between">
+            <span>http://127.0.0.1:<code>5002</code></span>
+            {% if postagens %}
+            <span class="badge bg-success rounded-pill my-auto">ON</span>
+            {% else %}
+            <span class="badge bg-danger rounded-pill my-auto">OFF</span>
+            {% endif %}
+        </div>
+
+        <p class="my-2">Serviço de comentarios</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 d-flex justify-content-between">
+            <span>http://127.0.0.1:<code>5003</code></span>
+            {% if comentarios %}
+            <span class="badge bg-success rounded-pill my-auto">ON</span>
+            {% else %}
+            <span class="badge bg-danger rounded-pill my-auto">OFF</span>
+            {% endif %}
+        </div>
+
+    </div>
+
+
+    <div class="bg-body-tertiary shadow-sm p-4 rounded-3">
+
+        <h3>Endpoints do Serviço de usuários</h3>
+
+        <p>Carregando a lista de todos os usuários:</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">GET</span>
+            "/usuarios"
+        </div>
+
+        <hr>
+
+        <p>Carregando um usuário pelo id:</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">GET</span>
+            "/usuarios/{<code>string</code>:user_id}"
+        </div>
+
+        <hr>
+
+        <p>Carregando o perfil completo de um usuário pelo id.</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">GET</span>
+            "/usuarios/{<code>string</code>:user_id}/perfil"
+        </div>
+        <small class="mt-2">Esse endpoint retorna o perfil do usuário com a adição das postagens feitas.</small>
+
+        <hr>
+
+        <p>Criando um usuário.</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">POST</span>
+            "/usuarios/"
+        </div>
+
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 mt-3">
+            <span class="badge bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">BODY</span>
+            {"username":<code>str</code>, "nome":<code>str</code>, "bio":<code>str</code>}
+        </div>
+
+        <hr>
+
+        <p>Atualizando um usuário.</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">PUT</span>
+            "/usuarios/{<code>string</code>:user_id}/"
+        </div>
+
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 mt-3">
+            <span class="badge bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">BODY</span>
+            {"bio":<code>str</code>}
+        </div>
+
+        <hr>
+
+        <p>Removendo um usuário.</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">DELETE</span>
+            "/usuarios/{<code>string</code>:user_id}"
+        </div>
+    </div>
+
+    <div class="bg-body-tertiary shadow-sm p-4 rounded-3 mt-4">
+
+        <h3>Endpoints do Serviço de postagens</h3>
+
+        <p>Carregando a lista de todas as postagens:</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">GET</span>
+            "/postagens"
+        </div>
+
+        <hr>
+
+        <p>Carregando uma postagem pelo id:</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">GET</span>
+            "/postagens/{<code>string</code>:postagem_id}"
+        </div>
+
+        <hr>
+
+        <p>Carregando postagens por usuário.</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">GET</span>
+            "/postagens/usuario/{<code>string</code>:user_id}"
+        </div>
+        <small class="mt-2">Esse endpoint retorna todas as postagens do usuário com o <code>user_id</code>.</small>
+
+        <hr>
+
+        <p>Criando uma postagem.</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">POST</span>
+            "/postagens/"
+        </div>
+
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 mt-3">
+            <span class="badge bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">BODY</span>
+            {"uid":<code>str</code>,"conteudo":<code>str</code>}
+        </div>
+
+        <hr>
+
+        <p>Atualizando uma postagem.</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">PUT</span>
+            "/postagens/{<code>string</code>:postagem_id}/"
+        </div>
+
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 mt-3">
+            <span class="badge bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">BODY</span>
+            {"conteudo":<code>str</code>}
+        </div>
+
+        <hr>
+
+        <p>Removendo uma postagem.</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">DELETE</span>
+            "/postagens/{<code>string</code>:postagem_id}"
+        </div>
+    </div>
+
+    <div class="bg-body-tertiary shadow-sm p-4 rounded-3 mt-4">
+
+        <h3>Endpoints do Serviço de comentarios</h3>
+
+        <p>Carregando a lista de todos os comentarios:</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">GET</span>
+            "/comentarios"
+        </div>
+
+        <hr>
+
+        <p>Carregando um comentario pelo id:</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">GET</span>
+            "/comentarios/{<code>string</code>:comentario_id}"
+        </div>
+
+        <hr>
+
+        <p>Carregando comentarios por postagem.</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">GET</span>
+            "/comentarios/postagem/{<code>string</code>:postagem_id}"
+        </div>
+        <small class="mt-2">Esse endpoint retorna todos os comentarios de uma postagem com o <code>postagem_id</code>.</small>
+
+        <hr>
+
+        <p>Criando um comentario.</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">POST</span>
+            "/comentarios/"
+        </div>
+
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 mt-3">
+            <span class="badge bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">BODY</span>
+            {"uid":<code>str</code>,"pid":<code>str</code>,"conteudo":<code>str</code>}
+        </div>
+
+        <hr>
+
+        <p>Atualizando um comentario.</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">PUT</span>
+            "/comentarios/{<code>string</code>:comentario_id}/"
+        </div>
+
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 mt-3">
+            <span class="badge bg-primary-subtle border border-primary-subtle text-primary-emphasis rounded-pill">BODY</span>
+            {"conteudo":<code>str</code>}
+        </div>
+
+        <hr>
+
+        <p>Removendo um comentarios.</p>
+        <div class="bg-dark-subtle  text-dark-emphasis p-2 rounded-2 ">
+            <span class="badge bg-warning-subtle border border-warning-subtle text-warning-emphasis rounded-pill">DELETE</span>
+            "/comentarios/{<code>string</code>:comentario_id}"
+        </div>
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+</html>
